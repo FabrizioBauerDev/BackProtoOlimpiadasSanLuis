@@ -43,7 +43,7 @@ public class OlimpiadaServiceImpl implements OlimpiadaService {
     }
 
     @Override
-    @Transactional
+    @Transactional //Que hace este @?
     public boolean deleteOlimpiada(int id) {
         try {
             olimpiadaRepository.deleteById(id);
