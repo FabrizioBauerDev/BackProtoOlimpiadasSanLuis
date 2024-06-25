@@ -19,12 +19,18 @@ public class OlimpiadaController {
     @Autowired
     private OlimpiadaService olimpiadaService;
 
-    @GetMapping("/getAll")
+    @GetMapping(path = "/getAll")
     public List<Olimpiada> getAllOlimpiadas(){
         return olimpiadaService.getAll();
     }
 
-    @GetMapping("/getById/{id}")
+    @GetMapping(path = "/getById/{id}")
     public Olimpiada getByIdOlimpiada(@PathVariable int id){return olimpiadaService.getById(id);}
+    
+    @GetMapping(path = "/count")
+    public long countOlimpiadas(){
+        return olimpiadaService.countOlimpiadas();
+    }
+    
 }
 

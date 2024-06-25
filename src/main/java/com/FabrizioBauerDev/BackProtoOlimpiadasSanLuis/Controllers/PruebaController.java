@@ -28,4 +28,9 @@ public class PruebaController {
         return pruebaService.getById(id);
     }
 
+    @GetMapping(path = "/count")
+    public long countPruebas(){
+        return pruebaService.countPruebas();
+    }
+
 }

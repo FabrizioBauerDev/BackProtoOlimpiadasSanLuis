@@ -25,7 +25,7 @@ public class Atleta {
     private String apellido;
 
     @Column(nullable = false)
-    private String dni; //En el diagrama ta asi q se yo
+    private long dni;
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)

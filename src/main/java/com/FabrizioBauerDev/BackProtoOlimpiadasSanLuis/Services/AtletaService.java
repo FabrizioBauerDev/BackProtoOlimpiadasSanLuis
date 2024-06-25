@@ -16,5 +16,5 @@ public interface AtletaService {
 
     boolean deleteAtleta(int id);
 
-    long countAtleta();
+    long countAtletas();
 }

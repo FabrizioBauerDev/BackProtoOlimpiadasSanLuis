@@ -53,7 +53,7 @@ public class AtletaServiceImpl implements AtletaService {
     }
 
     @Override
-    public long countAtleta() {
+    public long countAtletas() {
         return atletaRepository.count();
     }
 }

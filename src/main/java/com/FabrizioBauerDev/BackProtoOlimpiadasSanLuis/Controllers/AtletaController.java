@@ -18,9 +18,14 @@ public class AtletaController {
     private AtletaService atletaService;
 
     @GetMapping(path = "/getAll")
-    public List<Atleta> getAllEtapa(){return atletaService.getAll();}
+    public List<Atleta> getAllAtleta(){return atletaService.getAll();}
 
     @GetMapping(path = "/getById/{id}")
-    public Atleta getByIdEtapa(@PathVariable int id){return atletaService.getById(id);}
+    public Atleta getByAtleta(@PathVariable int id){return atletaService.getById(id);}
+
+    @GetMapping(path = "/count")
+    public long countAtletas(){
+        return atletaService.countAtletas();
+    }
 
 }

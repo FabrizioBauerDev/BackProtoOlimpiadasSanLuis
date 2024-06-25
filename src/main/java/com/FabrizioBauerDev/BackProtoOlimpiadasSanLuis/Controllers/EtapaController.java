@@ -22,4 +22,10 @@ public class EtapaController {
 
     @GetMapping(path = "/getById/{id}")
     public Etapa getByIdEtapa(@PathVariable int id){return etapaService.getById(id);}
+
+    @GetMapping(path = "/count")
+    public long countEtapas(){
+        return etapaService.countEtapa();
+    }
+
 }
