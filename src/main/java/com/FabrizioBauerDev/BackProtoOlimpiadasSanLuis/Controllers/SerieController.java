@@ -1,7 +1,8 @@
 package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Controllers;
 
-import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Atleta;
-import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.AtletaService;
+
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Serie;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.SerieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,21 +12,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/atleta")
-public class AtletaController {
+@RequestMapping(path = "/api/serie")
+public class SerieController {
 
     @Autowired
-    private AtletaService atletaService;
+    private SerieService serieService;
 
     @GetMapping(path = "/getAll")
-    public List<Atleta> getAllAtleta(){return atletaService.getAll();}
+    public List<Serie> getAllSerie(){return serieService.getAll();}
 
     @GetMapping(path = "/getById/{id}")
-    public Atleta getByAtleta(@PathVariable long id){return atletaService.getById(id);}
+    public Serie getBySerieId(@PathVariable long id){return serieService.getById(id);}
 
     @GetMapping(path = "/count")
-    public long countAtletas(){
-        return atletaService.countAtletas();
+    public long countSeries(){
+        return serieService.countSeries();
     }
 
 }

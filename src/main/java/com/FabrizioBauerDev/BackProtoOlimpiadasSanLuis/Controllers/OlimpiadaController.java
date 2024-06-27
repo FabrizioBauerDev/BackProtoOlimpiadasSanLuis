@@ -25,7 +25,7 @@ public class OlimpiadaController {
     }
 
     @GetMapping(path = "/getById/{id}")
-    public Olimpiada getByIdOlimpiada(@PathVariable int id){return olimpiadaService.getById(id);}
+    public Olimpiada getByIdOlimpiada(@PathVariable long id){return olimpiadaService.getById(id);}
     
     @GetMapping(path = "/count")
     public long countOlimpiadas(){

@@ -7,13 +7,13 @@ import java.util.List;
 public interface EtapaService {
     List<Etapa> getAll();
 
-    Etapa getById(int id);
+    Etapa getById(long id);
 
     Etapa createEtapa(Etapa etapa);
 
-    Etapa  updateEtapa(int id, Etapa etapa);
+    Etapa  updateEtapa(long id, Etapa etapa);
 
-    boolean deleteEtapa(int id);
+    boolean deleteEtapa(long id);
 
     long countEtapa();
 }

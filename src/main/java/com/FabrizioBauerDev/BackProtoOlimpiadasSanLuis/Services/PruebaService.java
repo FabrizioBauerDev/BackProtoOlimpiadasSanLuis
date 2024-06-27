@@ -8,13 +8,13 @@ public interface PruebaService {
 
     List<Prueba> getAll();
 
-    Prueba getById(int id);
+    Prueba getById(long id);
 
     Prueba createPrueba(Prueba prueba);
 
-    Prueba updatePrueba(int id, Prueba prueba);
+    Prueba updatePrueba(long id, Prueba prueba);
 
-    boolean deletePrueba(int id);
+    boolean deletePrueba(long id);
 
     long countPruebas();
 

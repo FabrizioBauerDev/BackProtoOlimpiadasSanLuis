@@ -21,7 +21,7 @@ public class EtapaController {
     public List<Etapa> getAllEtapa(){return etapaService.getAll();}
 
     @GetMapping(path = "/getById/{id}")
-    public Etapa getByIdEtapa(@PathVariable int id){return etapaService.getById(id);}
+    public Etapa getByIdEtapa(@PathVariable long id){return etapaService.getById(id);}
 
     @GetMapping(path = "/count")
     public long countEtapas(){

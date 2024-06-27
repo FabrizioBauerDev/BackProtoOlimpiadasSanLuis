@@ -23,7 +23,7 @@ public class PruebaServiceImpl implements PruebaService {
     }
 
     @Override
-    public Prueba getById(int id) {
+    public Prueba getById(long id) {
         return pruebaRepository.findById(id).orElse(null);
     }
 
@@ -33,7 +33,7 @@ public class PruebaServiceImpl implements PruebaService {
     }
 
     @Override
-    public Prueba updatePrueba(int id, Prueba prueba) {
+    public Prueba updatePrueba(long id, Prueba prueba) {
         Prueba pruebaBBDD = pruebaRepository.findById(id).orElse(null);
         if (pruebaBBDD != null) {
             //Setear todo lo de pruebaBBDD con prueba
@@ -44,7 +44,7 @@ public class PruebaServiceImpl implements PruebaService {
 
     @Override
     @Transactional
-    public boolean deletePrueba(int id) {
+    public boolean deletePrueba(long id) {
         try {
             pruebaRepository.deleteById(id);
             return true;

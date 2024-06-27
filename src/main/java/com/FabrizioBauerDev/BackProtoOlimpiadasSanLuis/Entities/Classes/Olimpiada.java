@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Olimpiada")
+@Table(name = "Olimpiadas")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,7 +14,7 @@ public class Olimpiada {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(nullable = false)
     private int anio;

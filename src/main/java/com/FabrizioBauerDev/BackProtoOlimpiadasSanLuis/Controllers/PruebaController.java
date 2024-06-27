@@ -24,7 +24,7 @@ public class PruebaController {
     }
 
     @GetMapping(path = "/getById/{id}")
-    public Prueba getPruebaById(@PathVariable int id){
+    public Prueba getPruebaById(@PathVariable long id){
         return pruebaService.getById(id);
     }
 

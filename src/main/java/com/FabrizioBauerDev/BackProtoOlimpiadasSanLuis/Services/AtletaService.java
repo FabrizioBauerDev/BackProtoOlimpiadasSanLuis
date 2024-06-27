@@ -8,13 +8,13 @@ import java.util.List;
 public interface AtletaService {
     List<Atleta> getAll();
 
-    Atleta getById(int id);
+    Atleta getById(long id);
 
     Atleta createAtleta(Atleta atleta);
 
-    Atleta  updateAtleta(int id, Atleta atleta);
+    Atleta  updateAtleta(long id, Atleta atleta);
 
-    boolean deleteAtleta(int id);
+    boolean deleteAtleta(long id);
 
     long countAtletas();
 }

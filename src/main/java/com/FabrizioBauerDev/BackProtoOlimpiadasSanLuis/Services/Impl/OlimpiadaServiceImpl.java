@@ -23,7 +23,7 @@ public class OlimpiadaServiceImpl implements OlimpiadaService {
     }
 
     @Override
-    public Olimpiada getById(int id) {
+    public Olimpiada getById(long id) {
         return olimpiadaRepository.findById(id).orElse(null);
     }
 
@@ -33,7 +33,7 @@ public class OlimpiadaServiceImpl implements OlimpiadaService {
     }
 
     @Override
-    public Olimpiada updateOlimpiada(int id, Olimpiada olimpiada) {
+    public Olimpiada updateOlimpiada(long id, Olimpiada olimpiada) {
         Olimpiada olimpiadaBBDD = olimpiadaRepository.findById(id).orElse(null);
         if (olimpiadaBBDD != null) {
             //Setear todo lo de olimpiadaBBDD
@@ -43,8 +43,8 @@ public class OlimpiadaServiceImpl implements OlimpiadaService {
     }
 
     @Override
-    @Transactional //Que hace este @?
-    public boolean deleteOlimpiada(int id) {
+    @Transactional
+    public boolean deleteOlimpiada(long id) {
         try {
             olimpiadaRepository.deleteById(id);
             return true;

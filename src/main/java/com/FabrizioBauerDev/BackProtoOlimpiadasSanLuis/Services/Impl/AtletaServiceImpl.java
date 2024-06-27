@@ -22,7 +22,7 @@ public class AtletaServiceImpl implements AtletaService {
     }
 
     @Override
-    public Atleta getById(int id) {
+    public Atleta getById(long id) {
         return atletaRepository.findById(id).orElse(null);
     }
 
@@ -33,7 +33,7 @@ public class AtletaServiceImpl implements AtletaService {
 
     @Override
     @Transactional
-    public Atleta updateAtleta(int id, Atleta atleta) {
+    public Atleta updateAtleta(long id, Atleta atleta) {
         Atleta atleta1 = atletaRepository.findById(id).orElse(null);
         if (atleta1 != null) {
             // Setear cada campo de atleta1 con etapa
@@ -43,7 +43,7 @@ public class AtletaServiceImpl implements AtletaService {
 
     @Override
     @Transactional
-    public boolean deleteAtleta(int id) {
+    public boolean deleteAtleta(long id) {
         try {
             atletaRepository.deleteById(id);
             return true;

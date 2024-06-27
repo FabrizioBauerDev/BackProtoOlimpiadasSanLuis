@@ -8,13 +8,13 @@ public interface OlimpiadaService {
 
     List<Olimpiada> getAll();
 
-    Olimpiada getById(int id);
+    Olimpiada getById(long id);
 
     Olimpiada createOlimpiada(Olimpiada olimpiada);
 
-    Olimpiada updateOlimpiada(int id, Olimpiada olimpiada);
+    Olimpiada updateOlimpiada(long id, Olimpiada olimpiada);
 
-    boolean deleteOlimpiada(int id);
+    boolean deleteOlimpiada(long id);
 
     long countOlimpiadas();
 

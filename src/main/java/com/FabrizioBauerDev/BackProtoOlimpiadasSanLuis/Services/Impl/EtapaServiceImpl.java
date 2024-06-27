@@ -22,7 +22,7 @@ public class EtapaServiceImpl implements EtapaService {
     }
 
     @Override
-    public Etapa getById(int id) {
+    public Etapa getById(long id) {
         return etapaRepository.findById(id).orElse(null);
     }
 
@@ -33,7 +33,7 @@ public class EtapaServiceImpl implements EtapaService {
 
     @Override
     @Transactional
-    public Etapa updateEtapa(int id, Etapa etapa) {
+    public Etapa updateEtapa(long id, Etapa etapa) {
         Etapa etapa1 = etapaRepository.findById(id).orElse(null);
         if (etapa1 != null) {
             // Setear cada campo de etapa1 con etapa
@@ -43,7 +43,7 @@ public class EtapaServiceImpl implements EtapaService {
 
     @Override
     @Transactional
-    public boolean deleteEtapa(int id) {
+    public boolean deleteEtapa(long id) {
         try {
             etapaRepository.deleteById(id);
             return true;
