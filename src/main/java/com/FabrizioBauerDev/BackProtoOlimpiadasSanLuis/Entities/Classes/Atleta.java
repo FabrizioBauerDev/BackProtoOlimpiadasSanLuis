@@ -36,6 +36,8 @@ public class Atleta {
     @Temporal(TemporalType.DATE)
     private LocalDate fecha;
 
-    @Column(nullable = false)
-    private String institucion;
+    @ManyToOne
+    @JoinColumn(name = "institucion_id", nullable = false)
+    private Institucion institucion;
+
 }

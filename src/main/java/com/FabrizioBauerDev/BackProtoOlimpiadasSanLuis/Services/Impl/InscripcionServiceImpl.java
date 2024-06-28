@@ -75,4 +75,5 @@ public class InscripcionServiceImpl implements InscripcionService {
     public long countInscripciones() {
         return inscripcionRepository.count();
     }
+
 }

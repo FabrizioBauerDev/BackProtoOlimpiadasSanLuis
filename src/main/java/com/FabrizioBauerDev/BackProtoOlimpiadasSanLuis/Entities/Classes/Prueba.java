@@ -2,6 +2,7 @@ package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes;
 
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Enums.Categorias;
 
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Enums.NombrePrueba;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Enums.Sexo;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Enums.TipoPrueba;
 import jakarta.persistence.*;
@@ -32,8 +33,9 @@ public class Prueba {
     @Column(nullable = false)
     private Sexo sexo;
 
-    @Column(nullable = false, length = 100)
-    private String nombre;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private NombrePrueba nombre;
 
     @ManyToOne
     @JoinColumn(name = "etapa_id", nullable = false)

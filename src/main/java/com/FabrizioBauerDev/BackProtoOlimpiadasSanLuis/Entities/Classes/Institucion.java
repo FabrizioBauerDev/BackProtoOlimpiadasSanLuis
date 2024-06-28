@@ -6,35 +6,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Entity
-@Table(name = "Etapas")
+@Table(name ="Institucion")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Etapa {
+public class Institucion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(nullable = false)
+    private String nombre;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Regiones region;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
-    private LocalDate fecha;
-
-    @Column(nullable = false, length = 100)
-    private String lugar;
-
-    @Column
-    private short cantAndariveles;
-
-    @ManyToOne
-    @JoinColumn(name = "olimpiada_id", nullable = false)
-    private Olimpiada olimpiada;
+    private long puntuacion;
 
 }

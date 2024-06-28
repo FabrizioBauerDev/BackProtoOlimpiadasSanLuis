@@ -27,7 +27,6 @@ public class Serie {
     @Column(nullable = false)
     private InstanciaSerie instancia;
 
-    @Column(nullable = false)
     private LocalTime hora;
 
     private float viento;
@@ -38,4 +37,9 @@ public class Serie {
     @JoinColumn(name = "prueba_id", nullable = false)
     private Prueba prueba;
 
+    public Serie(String nombre, InstanciaSerie instancia, Prueba prueba) {
+        this.nombre = nombre;
+        this.instancia = instancia;
+        this.prueba = prueba;
+    }
 }
