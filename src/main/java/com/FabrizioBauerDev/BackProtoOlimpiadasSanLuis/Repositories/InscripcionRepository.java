@@ -1,6 +1,7 @@
 package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Repositories;
 
 
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Atleta;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Inscripcion;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.InscripcionId;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,4 +19,9 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Inscri
 
     @Query("SELECT i FROM Inscripcion i WHERE i.atleta.id = :atletaId")
     List<Inscripcion> findByAtletaId(@Param("atletaId") Long atletaId);
+
+    @Query("SELECT i.atleta FROM Inscripcion i " +
+            "WHERE i.prueba.id = :idPrueba " +
+            "ORDER BY i.atleta.institucion.id")
+    List<Atleta> findAtletasByPruebaIdOrderedByInstitucion(@Param("idPrueba") Long idPrueba);
 }

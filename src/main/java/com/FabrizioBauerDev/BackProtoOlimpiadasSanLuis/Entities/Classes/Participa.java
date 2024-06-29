@@ -40,4 +40,9 @@ public class Participa {
     @MapsId("serieId")
     private Serie serie;
 
+    public Participa(ParticipaId id,Atleta atleta,Serie serie) {
+        this.id = id;
+        this.atleta = atleta;
+        this.serie = serie;
+    }
 }
