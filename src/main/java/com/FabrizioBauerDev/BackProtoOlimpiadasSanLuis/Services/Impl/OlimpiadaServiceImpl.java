@@ -1,5 +1,6 @@
 package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.Impl;
 
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Etapa;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Olimpiada;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Repositories.OlimpiadaRepository;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.OlimpiadaService;

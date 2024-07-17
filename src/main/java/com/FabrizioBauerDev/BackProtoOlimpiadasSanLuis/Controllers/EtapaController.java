@@ -27,5 +27,4 @@ public class EtapaController {
     public long countEtapas(){
         return etapaService.countEtapa();
     }
-
 }

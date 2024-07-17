@@ -7,6 +7,8 @@ import java.util.List;
 public interface EtapaService {
     List<Etapa> getAll();
 
+    List<Etapa> getAllEtapasIdOlimpiada(long id);
+
     Etapa getById(long id);
 
     Etapa createEtapa(Etapa etapa);

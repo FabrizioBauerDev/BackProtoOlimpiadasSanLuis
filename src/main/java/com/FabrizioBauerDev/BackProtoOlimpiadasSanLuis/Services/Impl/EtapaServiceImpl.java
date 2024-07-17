@@ -22,6 +22,10 @@ public class EtapaServiceImpl implements EtapaService {
     }
 
     @Override
+    public List<Etapa> getAllEtapasIdOlimpiada(long id) {
+        return etapaRepository.findEtapasByOlimpiadaId(id);
+    }
+    @Override
     public Etapa getById(long id) {
         return etapaRepository.findById(id).orElse(null);
     }
