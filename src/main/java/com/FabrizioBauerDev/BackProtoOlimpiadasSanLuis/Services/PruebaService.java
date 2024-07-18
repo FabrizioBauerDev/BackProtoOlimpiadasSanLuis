@@ -1,12 +1,15 @@
 package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services;
 
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Prueba;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.DTOs.PruebaDTO;
 
 import java.util.List;
 
 public interface PruebaService {
 
     List<Prueba> getAll();
+
+    List<PruebaDTO> getAllPruebasIdEtapa(long id);
 
     Prueba getById(long id);
 

@@ -1,6 +1,7 @@
 package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.Impl;
 
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Etapa;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.DTOs.EtapaDTO;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Repositories.EtapaRepository;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.EtapaService;
 import jakarta.transaction.Transactional;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EtapaServiceImpl implements EtapaService {
@@ -22,9 +25,20 @@ public class EtapaServiceImpl implements EtapaService {
     }
 
     @Override
-    public List<Etapa> getAllEtapasIdOlimpiada(long id) {
-        return etapaRepository.findEtapasByOlimpiadaId(id);
+    public List<EtapaDTO> getAllEtapasIdOlimpiada(long id) {
+        List<Etapa> etapas = etapaRepository.findEtapasByOlimpiadaId(id);
+
+        return etapas.stream().map(etapa -> {
+            EtapaDTO etapaDTO = new EtapaDTO();
+            etapaDTO.setId(etapa.getId());
+            etapaDTO.setRegion(etapa.getRegion().toString());
+            etapaDTO.setFecha(etapa.getFecha());
+            etapaDTO.setLugar(etapa.getLugar());
+            etapaDTO.setCantAndariveles(etapa.getCantAndariveles());
+            return etapaDTO;
+        }).collect(Collectors.toList());
     }
+
     @Override
     public Etapa getById(long id) {
         return etapaRepository.findById(id).orElse(null);

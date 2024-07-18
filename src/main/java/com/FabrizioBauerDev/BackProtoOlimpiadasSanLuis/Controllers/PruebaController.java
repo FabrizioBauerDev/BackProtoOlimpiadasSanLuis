@@ -2,6 +2,7 @@ package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Controllers;
 
 
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Prueba;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.DTOs.PruebaDTO;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.PruebaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,11 @@ public class PruebaController {
     @GetMapping(path = "/getAll")
     public List<Prueba> getALLPruebas(){
         return pruebaService.getAll();
+    }
+
+    @GetMapping(path = "/getPruebasByIdEtapa/{id}")
+    public List<PruebaDTO> getPruebasByIdEtapa(@PathVariable long id){
+        return pruebaService.getAllPruebasIdEtapa(id);
     }
 
     @GetMapping(path = "/getById/{id}")

@@ -2,6 +2,7 @@ package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.Impl;
 
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Olimpiada;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Prueba;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.DTOs.PruebaDTO;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Repositories.PruebaRepository;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.PruebaService;
 import jakarta.transaction.Transactional;
@@ -10,6 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PruebaServiceImpl implements PruebaService {
@@ -20,6 +22,21 @@ public class PruebaServiceImpl implements PruebaService {
     @Override
     public List<Prueba> getAll() {
         return pruebaRepository.findAll();
+    }
+
+    @Override
+    public List<PruebaDTO> getAllPruebasIdEtapa(long id) {
+        List<Prueba> pruebas = pruebaRepository.findPruebasByEtapaId(id);
+
+        return pruebas.stream().map(prueba -> {
+            PruebaDTO pruebaDTO = new PruebaDTO();
+            pruebaDTO.setId(prueba.getId());
+            pruebaDTO.setCategoria(prueba.getCategoria());
+            pruebaDTO.setTipo(prueba.getTipo().toString());
+            pruebaDTO.setSexo(prueba.getSexo());
+            pruebaDTO.setNombre(prueba.getNombre().toString());
+            return pruebaDTO;
+        }).collect(Collectors.toList());
     }
 
     @Override

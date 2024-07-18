@@ -1,13 +1,14 @@
 package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services;
 
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Etapa;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.DTOs.EtapaDTO;
 
 import java.util.List;
 
 public interface EtapaService {
     List<Etapa> getAll();
 
-    List<Etapa> getAllEtapasIdOlimpiada(long id);
+    List<EtapaDTO> getAllEtapasIdOlimpiada(long id);
 
     Etapa getById(long id);
 
