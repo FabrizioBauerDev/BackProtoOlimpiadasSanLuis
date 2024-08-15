@@ -1,12 +1,13 @@
 package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.Impl;
 
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.*;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.DTOs.SerieDTO;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Enums.InstanciaSerie;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Repositories.InscripcionRepository;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Repositories.ParticipaRepository;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Repositories.PruebaRepository;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Repositories.SerieRepository;
-import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.*;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.UtilsService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,12 +30,9 @@ public class UtilsServiceImpl implements UtilsService {
     @Autowired
     private ParticipaRepository participaRepository;
 
-    @Override
-    @Transactional
-    public List<Serie> generateSeriesByAnd(long idPrueba) {
-        // Obtener cantidad de andariveles
+    private List<SerieDTO> generateSeries(long idPrueba, int cantSeries) {
+        // Obtener la prueba
         Prueba prueba = pruebaRepository.findById(idPrueba).orElse(null);
-        int cantAndariveles = prueba.getEtapa().getCantAndariveles();
 
         // Obtener cantidad de inscriptos en la prueba y ordenarlos por institución
         List<Atleta> inscriptos = inscripcionRepository.findByPruebaId(idPrueba).stream()
@@ -42,48 +40,60 @@ public class UtilsServiceImpl implements UtilsService {
                 .sorted(Comparator.comparing(atleta -> atleta.getInstitucion().getId())) // Ordenar por institución
                 .toList();
 
-        // List<Atleta> inscriptos = inscripcionRepository.findAtletasByPruebaIdOrderedByInstitucion(idPrueba); // Veremos si funca
-        int cantInscriptos = inscriptos.size();
-
-
-        // Calcular la cantidad de series necesarias
-        int cantSeries = (int) Math.ceil((double) cantInscriptos / cantAndariveles);
-
         // Crear las series en la base de datos
         List<Serie> series = new ArrayList<>();
-
-        int i;
-        for (i = 0; i < cantSeries; i++) {
+        for (int i = 0; i < cantSeries; i++) {
             Serie serie = new Serie("Serie " + (i + 1), InstanciaSerie.Serie, prueba);
             series.add(serieRepository.save(serie)); // Almacenar la serie y obtener el ID
         }
-        System.out.println(series);
+
         // Asignar atletas a las series minimizando la repetición de atletas de la misma institución
         List<Participa> participaciones = new ArrayList<>();
-
-        i=0;
-        for (Atleta atleta : inscriptos) {
-            participaciones.add(new Participa(new ParticipaId(atleta.getId(),series.get( i % cantSeries).getId()),atleta,series.get( i % cantSeries)));
-            i++;
+        for (int i = 0; i < inscriptos.size(); i++) {
+            participaciones.add(new Participa(
+                    new ParticipaId(inscriptos.get(i).getId(), series.get(i % cantSeries).getId()),
+                    inscriptos.get(i),
+                    series.get(i % cantSeries)
+            ));
         }
-        System.out.println(participaciones);
-        // Mezclar para que parezca mas aleatorio
+
+        // Mezclar para que parezca más aleatorio
         Collections.shuffle(participaciones);
-        System.out.println(participaciones);
+
         // Almacenar las participaciones en la base de datos
         participaRepository.saveAll(participaciones);
 
-        return series;
+        // Retornar SeriesDTO
+        return series.stream().map(serie -> {
+            SerieDTO serieDTO = new SerieDTO();
+            serieDTO.setNombre(serie.getNombre());
+            serieDTO.setInstancia(serie.getInstancia());
+            serieDTO.setPruebaId(serie.getPrueba().getId());
+            return serieDTO;
+        }).collect(Collectors.toList());
     }
 
-
     @Override
-    public List<Serie> generateSeriesByAtleta(long idPrueba, int cantAtletas) {
-        return List.of();
+    @Transactional
+    public List<SerieDTO> generateSeriesByAnd(long idPrueba) {
+        Prueba prueba = pruebaRepository.findById(idPrueba).orElse(null);
+        int cantAndariveles = prueba.getEtapa().getCantAndariveles();
+        int cantInscriptos = inscripcionRepository.countByPruebaId(idPrueba);
+        int cantSeries = (int) Math.ceil((double) cantInscriptos / cantAndariveles);
+        return generateSeries(idPrueba, cantSeries);
     }
 
     @Override
-    public List<Serie> generateSeriesByDivision(long idPrueba, int cantDivision) {
-        return List.of();
+    @Transactional
+    public List<SerieDTO> generateSeriesByCantAtletas(long idPrueba, int cantidad) {
+        int cantInscriptos = inscripcionRepository.countByPruebaId(idPrueba);
+        int cantSeries = (int) Math.ceil((double) cantInscriptos / cantidad);
+        return generateSeries(idPrueba, cantSeries);
+    }
+
+    @Override
+    @Transactional
+    public List<SerieDTO> generateSeriesByCantSeries(long idPrueba, int cantSeries) {
+        return generateSeries(idPrueba, cantSeries);
     }
 }

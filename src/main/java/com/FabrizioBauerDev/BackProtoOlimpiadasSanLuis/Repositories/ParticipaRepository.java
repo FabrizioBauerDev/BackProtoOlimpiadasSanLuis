@@ -14,6 +14,9 @@ public interface ParticipaRepository extends JpaRepository<Participa, ParticipaI
     @Query("SELECT i FROM Participa i WHERE i.serie.id = :serieId")
     List<Participa> findBySerieId(@Param("serieId") Long serieId);
 
+    @Query("SELECT i FROM Participa i WHERE i.serie.prueba.id = :pruebaId")
+    List<Participa> findByPruebaId(@Param("pruebaId") Long pruebaId);
+
     @Query("SELECT i FROM Participa i WHERE i.atleta.id = :atletaId")
     List<Participa> findByAtletaId(@Param("atletaId") Long atletaId);
 }

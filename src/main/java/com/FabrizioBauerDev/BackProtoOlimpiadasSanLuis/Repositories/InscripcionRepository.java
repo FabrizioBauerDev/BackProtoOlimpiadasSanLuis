@@ -24,4 +24,7 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Inscri
             "WHERE i.prueba.id = :idPrueba " +
             "ORDER BY i.atleta.institucion.id")
     List<Atleta> findAtletasByPruebaIdOrderedByInstitucion(@Param("idPrueba") Long idPrueba);
+
+    @Query("SELECT COUNT(*) FROM Inscripcion i where i.prueba.id = :idPrueba")
+    int countByPruebaId(@Param("idPrueba") Long idPrueba);
 }

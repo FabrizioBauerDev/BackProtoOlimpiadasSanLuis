@@ -1,6 +1,7 @@
 package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.Impl;
 
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.*;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.DTOs.ParticipacionDTO;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Repositories.ParticipaRepository;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.ParticipaService;
 import jakarta.transaction.Transactional;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,11 +30,17 @@ public class ParticipaServiceImpl implements ParticipaService {
     }
 
     @Override
-    public List<Atleta> getAllBySerie(long serieId) {
+    public List<ParticipacionDTO> getAllBySerie(long serieId) {
         List<Participa> participaciones = participaRepository.findBySerieId(serieId);
-        return participaciones.stream()
-                .map(Participa::getAtleta)
-                .collect(Collectors.toList());
+
+        return convertToParticipacionDTOList(participaciones);
+    }
+
+    @Override
+    public List<ParticipacionDTO> getAllByPrueba(long pruebaId) {
+        List<Participa> participaciones = participaRepository.findByPruebaId(pruebaId);
+
+        return convertToParticipacionDTOList(participaciones);
     }
 
     @Override
@@ -49,13 +57,36 @@ public class ParticipaServiceImpl implements ParticipaService {
     }
 
     @Override
-    public Participa updateParticipa(ParticipaId id, Participa participa) {
-        Participa participa1 = participaRepository.findById(id).orElse(null);
-        if (participa1 == null) {
-            // Setear todo
-            return participaRepository.save(participa1);
+    public Participa updateParticipa(ParticipaId id, ParticipacionDTO participa) {
+        Participa participacion = participaRepository.findById(id).orElse(null);
+        if (participacion == null) {
+            participacion.setCondicion(participa.getCondicion());
+            participacion.setViento(participa.getViento());
+            participacion.setMarca(participa.getMarca());
+            participacion.setPuesto(participa.getPuesto());
+            participacion.setAndarivel(participa.getAndarivel());
+            return participaRepository.save(participacion);
         }
         return null;
+    }
+
+    @Override
+    @Transactional
+    public List<Participa> multipleUpdateParticipa(long serieId, List<ParticipacionDTO> participacionDTO){
+        List<Participa> participaciones = new ArrayList<>();
+        for(ParticipacionDTO dto : participacionDTO){
+            Participa participacion = participaRepository.findById(dto.getId()).orElse(null);;
+            if(participacion != null){
+                participacion.setCondicion(dto.getCondicion());
+                participacion.setViento(dto.getViento());
+                participacion.setMarca(dto.getMarca());
+                participacion.setPuesto(dto.getPuesto());
+                participacion.setAndarivel((dto.getAndarivel()));
+                participaciones.add(participacion);
+                participaRepository.save(participacion);
+            }
+        }
+        return participaciones;
     }
 
     @Override
@@ -73,4 +104,23 @@ public class ParticipaServiceImpl implements ParticipaService {
     public long countParticipantes() {
         return participaRepository.count();
     }
+
+    private List<ParticipacionDTO> convertToParticipacionDTOList(List<Participa> participaciones) {
+        return participaciones.stream().map(this::convertToParticipacionDTO).collect(Collectors.toList());
+    }
+
+    private ParticipacionDTO convertToParticipacionDTO(Participa participa) {
+        ParticipacionDTO participacionDTO = new ParticipacionDTO();
+        participacionDTO.setId(participa.getId());
+        participacionDTO.setAtleta(participa.getAtleta());
+        participacionDTO.setCondicion(participa.getCondicion());
+        participacionDTO.setViento(participa.getViento());
+        participacionDTO.setMarca(participa.getMarca());
+        participacionDTO.setPuesto(participa.getPuesto());
+        participacionDTO.setAndarivel(participa.getAndarivel());
+        participacionDTO.setNombreSerie(participa.getSerie().getNombre());
+        return participacionDTO;
+    }
+
+
 }

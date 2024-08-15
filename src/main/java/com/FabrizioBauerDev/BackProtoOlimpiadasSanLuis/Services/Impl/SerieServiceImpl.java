@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -35,6 +36,9 @@ public class SerieServiceImpl implements SerieService {
     public Serie updateSerie(long id, Serie serie) {
         Serie serie1 = serieRepository.findById(id).orElse(null);
         if (serie1 != null) {
+            serie1.setHora(serie.getHora());
+            serie1.setViento(serie.getViento());
+            serie1.setCantidadIntentos(serie.getCantidadIntentos());
             return serieRepository.save(serie);
         }
         return null;
@@ -54,5 +58,10 @@ public class SerieServiceImpl implements SerieService {
     @Override
     public long countSeries() {
         return serieRepository.count();
+    }
+
+    @Override
+    public List<Serie> getSeriesByPruebaId(@RequestParam Long pruebaId) {
+        return serieRepository.findAllByPruebaId(pruebaId);
     }
 }

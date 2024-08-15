@@ -32,7 +32,7 @@ public class PruebaServiceImpl implements PruebaService {
             PruebaDTO pruebaDTO = new PruebaDTO();
             pruebaDTO.setId(prueba.getId());
             pruebaDTO.setCategoria(prueba.getCategoria());
-            pruebaDTO.setTipo(prueba.getTipo().toString());
+            pruebaDTO.setTipo(prueba.getTipo());
             pruebaDTO.setSexo(prueba.getSexo());
             pruebaDTO.setNombre(prueba.getNombre().toString());
             return pruebaDTO;

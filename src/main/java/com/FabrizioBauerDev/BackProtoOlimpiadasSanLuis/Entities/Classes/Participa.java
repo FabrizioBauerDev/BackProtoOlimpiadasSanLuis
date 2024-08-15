@@ -20,15 +20,12 @@ public class Participa {
 
     private CondicionParticipa condicion;
 
-    //Puede que hayan 0 elementos, 1 elemento (prueba pista) o cantIntentos
-    @ElementCollection
-    private List<String> vientos;
+    @Column(length = 4)
+    private String viento;
 
-    //Puede ser 0 si condicion no OK, 1 prueba de pista o cantIntentos
-    @ElementCollection
-    private List<String> marcas;
+    private String marca;
 
-    private int posicion;
+    private int puesto;
 
     private int andarivel;
 

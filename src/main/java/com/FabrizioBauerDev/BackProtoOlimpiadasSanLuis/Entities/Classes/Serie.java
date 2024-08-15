@@ -29,7 +29,8 @@ public class Serie {
 
     private LocalTime hora;
 
-    private float viento;
+    @Column(length = 4)
+    private String viento;
 
     private int cantidadIntentos;
 

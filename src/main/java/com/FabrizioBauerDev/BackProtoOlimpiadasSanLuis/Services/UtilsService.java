@@ -1,15 +1,18 @@
 package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services;
 
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Participa;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Serie;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.DTOs.ParticipacionDTO;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.DTOs.SerieDTO;
 
 import java.util.List;
 
 public interface UtilsService {
 
-    List<Serie> generateSeriesByAnd(long idPrueba);
+    List<SerieDTO> generateSeriesByAnd(long idPrueba);
 
-    List<Serie> generateSeriesByAtleta(long idPrueba, int cantAtletas);
+    List<SerieDTO> generateSeriesByCantAtletas(long idPrueba, int cantidad);
 
-    List<Serie> generateSeriesByDivision(long idPrueba, int cantDivison);
+    List<SerieDTO> generateSeriesByCantSeries(long idPrueba, int cantDivison);
 
 }

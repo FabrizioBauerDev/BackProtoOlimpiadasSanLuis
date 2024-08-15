@@ -1,6 +1,10 @@
 package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Repositories;
 
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Etapa;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Prueba;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Enums.Categorias;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Enums.NombrePrueba;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Enums.Sexo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

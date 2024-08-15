@@ -1,6 +1,7 @@
 package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services;
 
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Serie;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -18,4 +19,5 @@ public interface SerieService {
 
     long countSeries();
 
+    List<Serie> getSeriesByPruebaId(@RequestParam Long pruebaId);
 }
