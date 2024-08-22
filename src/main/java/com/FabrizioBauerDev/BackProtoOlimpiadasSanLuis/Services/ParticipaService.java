@@ -25,4 +25,7 @@ public interface ParticipaService {
     long countParticipantes();
 
     List<Participa> multipleUpdateParticipa(long serieId, List<ParticipacionDTO> participacionDTO);
+
+    List<ParticipacionDTO> multipleCreateParticipaciones(long serieId, List<Long> atletasId);
+
 }

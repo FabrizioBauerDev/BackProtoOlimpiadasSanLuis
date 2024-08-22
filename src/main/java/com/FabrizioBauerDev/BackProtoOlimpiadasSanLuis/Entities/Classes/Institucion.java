@@ -27,4 +27,9 @@ public class Institucion {
     @Column(nullable = false)
     private long puntuacion;
 
+    public Institucion(String nombre, Regiones region, long puntuacion) {
+        this.nombre = nombre;
+        this.region = region;
+        this.puntuacion = puntuacion;
+    }
 }

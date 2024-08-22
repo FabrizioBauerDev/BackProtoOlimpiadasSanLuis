@@ -17,4 +17,6 @@ public interface AtletaService {
     boolean deleteAtleta(long id);
 
     long countAtletas();
+
+    Atleta findAtletasByDni(long dni);
 }

@@ -42,4 +42,5 @@ public class Participa {
         this.atleta = atleta;
         this.serie = serie;
     }
+    
 }

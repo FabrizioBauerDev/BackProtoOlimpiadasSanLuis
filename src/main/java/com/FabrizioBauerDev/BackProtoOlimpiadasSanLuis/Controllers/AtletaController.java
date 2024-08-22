@@ -3,10 +3,7 @@ package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Controllers;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Atleta;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.AtletaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +23,11 @@ public class AtletaController {
     @GetMapping(path = "/count")
     public long countAtletas(){
         return atletaService.countAtletas();
+    }
+
+    @GetMapping(path = "/getAtletaByDni")
+    public Atleta getAtletaByDni(@RequestParam("dni") long dni) {
+        return atletaService.findAtletasByDni(dni);
     }
 
 }

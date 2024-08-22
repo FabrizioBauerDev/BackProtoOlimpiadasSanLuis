@@ -25,7 +25,7 @@ public class Atleta {
     @Column(nullable = false)
     private String apellido;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private long dni;
 
     @Enumerated(EnumType.STRING)
@@ -40,4 +40,12 @@ public class Atleta {
     @JoinColumn(name = "institucion_id", nullable = false)
     private Institucion institucion;
 
+    public Atleta(String nombre, String apellido, long dni, Sexo sexo, LocalDate fecha, Institucion institucion) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.sexo = sexo;
+        this.fecha = fecha;
+        this.institucion = institucion;
+    }
 }

@@ -2,7 +2,9 @@ package com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.Impl;
 
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.*;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.DTOs.ParticipacionDTO;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Repositories.AtletaRepository;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Repositories.ParticipaRepository;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Repositories.SerieRepository;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.ParticipaService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,12 @@ public class ParticipaServiceImpl implements ParticipaService {
 
     @Autowired
     private ParticipaRepository participaRepository;
+
+    @Autowired
+    private AtletaRepository atletaRepository;
+
+    @Autowired
+    private SerieRepository serieRepository;
 
     @Override
     public List<Participa> getAll() {
@@ -87,6 +95,18 @@ public class ParticipaServiceImpl implements ParticipaService {
             }
         }
         return participaciones;
+    }
+
+    @Override
+    @Transactional
+    public List<ParticipacionDTO> multipleCreateParticipaciones(long serieId, List<Long> atletasId) {
+        List<Participa> participaciones = new ArrayList<>();
+        Serie serie = serieRepository.findById(serieId).orElse(null);
+        for(long atletaId : atletasId){
+            Atleta atleta = atletaRepository.findById(atletaId).orElse(null);
+            participaciones.add(participaRepository.save(new Participa(new ParticipaId(atletaId,serieId),atleta,serie)));
+        }
+        return convertToParticipacionDTOList(participaciones);
     }
 
     @Override

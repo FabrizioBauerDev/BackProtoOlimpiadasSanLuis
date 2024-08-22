@@ -4,6 +4,7 @@ import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Particip
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Serie;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.DTOs.ParticipacionDTO;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.DTOs.SerieDTO;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.POJO.RequestBodyExcel;
 
 import java.util.List;
 
@@ -15,4 +16,7 @@ public interface UtilsService {
 
     List<SerieDTO> generateSeriesByCantSeries(long idPrueba, int cantDivison);
 
+    List<SerieDTO> generateSeriesByCantFinales(long idPrueba, int cantidad);
+
+    void uploadByExcel(long olimpiadaId, long etapaId, RequestBodyExcel requestBody);
 }

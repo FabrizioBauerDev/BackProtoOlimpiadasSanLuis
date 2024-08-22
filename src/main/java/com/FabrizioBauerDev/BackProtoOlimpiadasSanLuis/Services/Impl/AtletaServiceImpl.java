@@ -56,4 +56,9 @@ public class AtletaServiceImpl implements AtletaService {
     public long countAtletas() {
         return atletaRepository.count();
     }
+
+    @Override
+    public Atleta findAtletasByDni(long dni) {
+        return atletaRepository.findByDni(dni);
+    }
 }

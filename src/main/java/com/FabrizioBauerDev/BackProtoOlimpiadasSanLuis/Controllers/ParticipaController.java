@@ -47,6 +47,19 @@ public class ParticipaController {
         return participaService.countParticipantes();
     }
 
+    @PostMapping(path = "/{serieId}")
+    public ResponseEntity<?> multipleCreateParticipaciones(@PathVariable long serieId, @RequestBody List<Long> atletasId) {
+        try {
+            // Intentar cargar las participaciones
+            List<ParticipacionDTO> participaciones = participaService.multipleCreateParticipaciones(serieId, atletasId);
+            // Devolver la lista de participaciones actualizadas
+            return ResponseEntity.ok(participaciones);
+        } catch (Exception e) {
+            // Manejo de cualquier otro error no esperado
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error inesperado: " + e.getMessage());
+        }
+    }
+
     @PutMapping(path = "/{serieId}/{atletaId}")
     public ResponseEntity<Participa> updateParticipa(@PathVariable long serieId,@PathVariable long atletaId, @RequestBody ParticipacionDTO participaUpdate){
         try {

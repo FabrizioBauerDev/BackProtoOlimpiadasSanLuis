@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AtletaRepository extends JpaRepository<Atleta,Long> {
+    Atleta findByDni(long dni);
 }

@@ -45,6 +45,22 @@ public enum NombrePrueba {
         this.displayName = displayName;
     }
 
+    public static NombrePrueba getPrueba(String prueba) {
+        switch(prueba){
+            case "80mts": return NombrePrueba._80_mts;
+            case "100mts": return NombrePrueba._100_mts;
+            case "600crosscountry": return NombrePrueba._600_mts_CrossCountry;
+            case "800crosscountry": return NombrePrueba._800_mts_CrossCountry;
+            case "1000crosscountry": return NombrePrueba._1000_mts_CrossCountry;
+            case "1200crosscountry": return NombrePrueba._1200_mts_CrossCountry;
+            case "bala2kg": return NombrePrueba.Bala_2Kg;
+            case "bala3kg": return NombrePrueba.Bala_3Kg;
+            case "bala4kg": return NombrePrueba.Bala_4Kg;
+            case "largo":return NombrePrueba.Largo;
+            default: return null;
+        }
+    }
+
     @Override
     public String toString() {
         return displayName;

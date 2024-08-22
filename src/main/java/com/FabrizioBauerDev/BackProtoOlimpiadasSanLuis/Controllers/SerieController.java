@@ -5,6 +5,7 @@ import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Particip
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.ParticipaId;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Prueba;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.Classes.Serie;
+import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Entities.DTOs.SerieDTO;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.PruebaService;
 import com.FabrizioBauerDev.BackProtoOlimpiadasSanLuis.Services.SerieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/api/serie")
@@ -35,6 +37,13 @@ public class SerieController {
     @GetMapping("/getAllByPruebaId/{id}")
     public List<Serie> getSeriesByPruebaId(@PathVariable Long id) {
         return serieService.getSeriesByPruebaId(id);
+    }
+
+    @PostMapping(path = "/createFinals")
+    public ResponseEntity<List<SerieDTO>> genereteFinals(@RequestParam long pruebaId, @RequestBody Map<String, Integer> requestBody){
+        int cant = requestBody.get("cant");
+        List<SerieDTO> finales = serieService.createNSeries(pruebaId,cant);
+        return new ResponseEntity<>(finales,HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{serieId}")
